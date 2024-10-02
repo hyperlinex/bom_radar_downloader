@@ -36,15 +36,13 @@ func Encode(productID string, t time.Time) string {
 func GetFileNames(c *ftp.ServerConn, productID string, numFiles int) ([]string, error) {
 	entries, err := c.List(".")
 	if err != nil {
-		panic(err)
-		//return nil, err
+		return nil, err
 	}
 
 	var filteredEntries []*ftp.Entry
 	for _, entry := range entries {
 		if strings.HasPrefix(entry.Name, productID+".T.") {
 			filteredEntries = append(filteredEntries, entry)
-			// fmt.Println(entry)
 		}
 	}
 
