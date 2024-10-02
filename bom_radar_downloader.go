@@ -29,7 +29,45 @@ func Encode(productID string, t time.Time) string {
 	return str
 }
 
-// TODO: Decode() function, pass in file name as a string, return Date object
+// Decode input file name string, return productID string and Date object
+func Decode(fileName string) (time.Time, string, error) {
+	// First, split between .T.
+	parts := strings.Split(fileName, ".T.")
+	if len(parts) != 2 {
+		return time.Time{}, "", fmt.Errorf("Name is invalid %s", fileName)
+	}
+
+	// Decode time
+	year, err := strconv.Atoi(parts[1][0:4])
+	if err != nil {
+		return time.Time{}, "", fmt.Errorf("Invalid year %s", parts[1][0:4])
+	}
+
+	month, err := strconv.Atoi(parts[1][4:6])
+	if err != nil {
+		return time.Time{}, "", fmt.Errorf("Invalid month %s", parts[1][4:6])
+	}
+
+	day, err := strconv.Atoi(parts[1][6:8])
+	if err != nil {
+		return time.Time{}, "", fmt.Errorf("Invalid day %s", parts[1][6:8])
+	}
+
+	hour, err := strconv.Atoi(parts[1][8:10])
+	if err != nil {
+		return time.Time{}, "", fmt.Errorf("Invalid hour %s", parts[1][8:10])
+	}
+
+	minute, err := strconv.Atoi(parts[1][10:12])
+	if err != nil {
+		return time.Time{}, "", fmt.Errorf("Invalid minute %s", parts[1][10:12])
+	}
+
+	// Create date type with the data
+	var date = time.Date(year, time.Month(month), day, hour, minute, 0, 0, time.UTC)
+	// Return the date
+	return date, parts[0], nil
+}
 
 // Return string slice of paths to files, error, of specified number of files,
 // in the current directory of an FTP server, sorted by last modified first.
