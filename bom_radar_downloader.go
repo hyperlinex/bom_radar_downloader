@@ -15,7 +15,7 @@ func Hello() {
 	fmt.Println("First time doing this :3, lets see if it works")
 }
 
-// TODO: Encode (revisit later, skip for now)
+// UNFINSHED: Encode a given date and product ID into BoM style naming convention
 func Encode(t time.Time) string {
 	var str = "time is, " + t.String()
 	return str

@@ -3,6 +3,7 @@ package bom_radar_downloader
 import (
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/jlaffaye/ftp"
 )
@@ -43,4 +44,9 @@ func TestGetFileNames(t *testing.T) {
 	for _, file := range files {
 		fmt.Println(file)
 	}
+}
+
+func TestEncode(t *testing.T) {
+	now := time.Now()
+	fmt.Println(now)
 }
