@@ -14,7 +14,7 @@ func TestHello(t *testing.T) {
 }
 
 func TestGetFileNames(t *testing.T) {
-	var prodID = "IDR66A"
+	var prodID = "IDR46A"
 	var ftpUrl = "ftp.bom.gov.au:21"
 	var user = "anonymous"
 	var pass = "anonymous"
@@ -47,6 +47,8 @@ func TestGetFileNames(t *testing.T) {
 }
 
 func TestEncode(t *testing.T) {
-	now := time.Now()
-	fmt.Println(now)
+	var prodID = "IDR66A"
+	var time = time.Now()
+	fileName := Encode(prodID, time.UTC())
+	fmt.Println(fileName)
 }

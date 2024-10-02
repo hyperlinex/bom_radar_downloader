@@ -3,6 +3,7 @@ package bom_radar_downloader
 import (
 	"fmt"
 	"sort"
+	"strconv"
 	"strings"
 	"time"
 
@@ -15,11 +16,20 @@ func Hello() {
 	fmt.Println("First time doing this :3, lets see if it works")
 }
 
-// UNFINSHED: Encode a given date and product ID into BoM style naming convention
-func Encode(t time.Time) string {
-	var str = "time is, " + t.String()
+// Encode a given date and product ID into BoM style naming convention
+func Encode(productID string, t time.Time) string {
+	var year = strconv.Itoa(t.Year())
+	var month = fmt.Sprintf("%02d", int(t.Minute()))
+	var day = fmt.Sprintf("%02d", t.Day())
+	var hour = fmt.Sprintf("%02d", t.Hour())
+	var minute = fmt.Sprintf("%02d", t.Minute())
+
+	var str = productID + ".T." + year + month + day + hour + minute
+
 	return str
 }
+
+// TODO: Decode() function, pass in file name as a string, return Date object
 
 // Return string slice of paths to files, error, of specified number of files,
 // in the current directory of an FTP server, sorted by last modified first.
